@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "cycle_name": "Q1 2025 Performance Review",
+    "start_date": "2025-01-01",
+    "end_date": "2025-03-31",
+    "status": "completed",
+    "description": "First quarter performance evaluation for all employees"
+  },
+  {
+    "id": 2,
+    "cycle_name": "Q2 2025 Performance Review",
+    "start_date": "2025-04-01",
+    "end_date": "2025-06-30",
+    "status": "in progress",
+    "description": "Second quarter performance evaluation"
+  },
+  {
+    "id": 3,
+    "cycle_name": "Q3 2025 Performance Review",
+    "start_date": "2025-07-01",
+    "end_date": "2025-09-30",
+    "status": "planned",
+    "description": "Third quarter performance evaluation"
+  },
+  {
+    "id": 4,
+    "cycle_name": "Annual 2025 Review",
+    "start_date": "2025-01-01",
+    "end_date": "2025-12-31",
+    "status": "in progress",
+    "description": "Full year performance review and goal assessment"
+  },
+  {
+    "id": 5,
+    "cycle_name": "Mid-Year 2025 Check-in",
+    "start_date": "2025-06-15",
+    "end_date": "2025-07-15",
+    "status": "planned",
+    "description": "Mid-year performance check-in and feedback session"
+  }
+]

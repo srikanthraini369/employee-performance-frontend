@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Data Seeder - Employee Management</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .container {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            padding: 30px;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+        }
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        button {
+            padding: 12px 24px;
+            font-size: 14px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+        .btn-primary:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        .btn-danger {
+            background: #f56565;
+            color: white;
+        }
+        .btn-danger:hover {
+            background: #e53e3e;
+        }
+        .btn-success {
+            background: #48bb78;
+            color: white;
+        }
+        .btn-success:hover {
+            background: #38a169;
+        }
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        .logs {
+            background: #f7fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            padding: 15px;
+            max-height: 500px;
+            overflow-y: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            line-height: 1.6;
+        }
+        .log-entry {
+            padding: 5px 0;
+            border-bottom: 1px solid #eee;
+        }
+        .log-entry:last-child {
+            border-bottom: none;
+        }
+        .log-success {
+            color: #22863a;
+            background: #f0f5f9;
+            padding: 5px 8px;
+            border-radius: 3px;
+        }
+        .log-error {
+            color: #cb2431;
+            background: #ffeef0;
+            padding: 5px 8px;
+            border-radius: 3px;
+        }
+        .log-info {
+            color: #0366d6;
+            background: #f1f8ff;
+            padding: 5px 8px;
+            border-radius: 3px;
+        }
+        .log-warning {
+            color: #6f42c1;
+            background: #f5f0ff;
+            padding: 5px 8px;
+            border-radius: 3px;
+        }
+        .status {
+            text-align: center;
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 6px;
+            font-weight: 600;
+        }
+        .status-success {
+            background: #c6f6d5;
+            color: #22543d;
+            border: 1px solid #9ae6b4;
+        }
+        .status-error {
+            background: #fed7d7;
+            color: #742a2a;
+            border: 1px solid #fc8181;
+        }
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .stat-box {
+            background: #f7fafc;
+            padding: 15px;
+            border-radius: 6px;
+            text-align: center;
+            border-left: 4px solid #667eea;
+        }
+        .stat-number {
+            font-size: 24px;
+            font-weight: bold;
+            color: #667eea;
+        }
+        .stat-label {
+            font-size: 12px;
+            color: #666;
+            margin-top: 5px;
+        }
+        .loading {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #667eea;
+            animation: blink 1.4s infinite;
+        }
+        @keyframes blink {
+            0%, 20%, 50%, 80%, 100% { opacity: 1; }
+            40% { opacity: 0.2; }
+            60% { opacity: 0.2; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 Employee Management - Test Data Seeder</h1>
+        <p class="subtitle">Populate your database with test data</p>
+        
+        <div class="button-group">
+            <button class="btn-primary" onclick="seedAllData()" id="seedBtn">
+                <span id="seedBtnText">Seed All Data</span>
+            </button>
+            <button class="btn-success" onclick="testConnection()">Test Connection</button>
+            <button class="btn-danger" onclick="clearLogs()">Clear Logs</button>
+        </div>
+
+        <div class="logs" id="logs">
+            <div class="log-entry"><span class="log-info">Logs will appear here...</span></div>
+        </div>
+
+        <div id="status" style="display: none;"></div>
+
+        <div class="stats">
+            <div class="stat-box">
+                <div class="stat-number" id="empCount">0</div>
+                <div class="stat-label">Employees</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number" id="cycleCount">0</div>
+                <div class="stat-label">Cycles</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number" id="goalCount">0</div>
+                <div class="stat-label">Goals</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number" id="reviewCount">0</div>
+                <div class="stat-label">Reviews</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const BASE_URL = 'http://localhost:8080';
+        let stats = { employees: 0, cycles: 0, goals: 0, reviews: 0 };
+
+        function log(message, type = 'info') {
+            const logs = document.getElementById('logs');
+            const entry = document.createElement('div');
+            entry.className = 'log-entry';
+            
+            const span = document.createElement('span');
+            span.className = `log-${type}`;
+            span.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
+            
+            entry.appendChild(span);
+            logs.appendChild(entry);
+            logs.scrollTop = logs.scrollHeight;
+        }
+
+        function clearLogs() {
+            document.getElementById('logs').innerHTML = '';
+            log('Logs cleared', 'info');
+        }
+
+        async function testConnection() {
+            try {
+                log('Testing connection...', 'info');
+                const response = await fetch(`${BASE_URL}/fetchall`, { timeout: 5000 });
+                if (response.ok) {
+                    const data = await response.json();
+                    log(`✅ Backend is running! Current employees: ${data.data?.length || 0}`, 'success');
+                } else {
+                    log(`❌ Backend responded with status ${response.status}`, 'error');
+                }
+            } catch (error) {
+                log(`❌ Connection failed: ${error.message}`, 'error');
+            }
+        }
+
+        async function makeRequest(endpoint, data) {
+            try {
+                const response = await fetch(`${BASE_URL}${endpoint}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                
+                if (response.ok) {
+                    return await response.json();
+                } else {
+                    throw new Error(`Status ${response.status}`);
+                }
+            } catch (error) {
+                throw error;
+            }
+        }
+
+        async function seedAllData() {
+            const btn = document.getElementById('seedBtn');
+            btn.disabled = true;
+            
+            clearLogs();
+            stats = { employees: 0, cycles: 0, goals: 0, reviews: 0 };
+            
+            log('🚀 Starting data seeding...', 'info');
+            log('═══════════════════════════════════════', 'info');
+
+            // Step 1: Employees
+            log('📝 STEP 1: Creating Employees...', 'info');
+            const employees = [
+                {
+                    emp_code: 'EM001',
+                    first_name: 'Rajesh',
+                    last_name: 'Kumar',
+                    email: 'rajesh.kumar@company.com',
+                    phoneNo: '9876543210',
+                    password: 'Password@123',
+                    department: 'IT',
+                    job_title: 'Senior Developer',
+                    gender: 'male',
+                    active: 'yes'
+                },
+                {
+                    emp_code: 'EM002',
+                    first_name: 'Priya',
+                    last_name: 'Singh',
+                    email: 'priya.singh@company.com',
+                    phoneNo: '9876543211',
+                    password: 'Password@123',
+                    department: 'HR',
+                    job_title: 'HR Manager',
+                    gender: 'female',
+                    manager_id: 1,
+                    active: 'yes'
+                },
+                {
+                    emp_code: 'EM003',
+                    first_name: 'Amit',
+                    last_name: 'Patel',
+                    email: 'amit.patel@company.com',
+                    phoneNo: '9876543212',
+                    password: 'Password@123',
+                    department: 'Sales',
+                    job_title: 'Sales Executive',
+                    gender: 'male',
+                    manager_id: 1,
+                    active: 'yes'
+                }
+            ];
+
+            for (const emp of employees) {
+                try {
+                    await makeRequest('/register', emp);
+                    stats.employees++;
+                    log(`✅ Created: ${emp.first_name} ${emp.last_name}`, 'success');
+                    document.getElementById('empCount').textContent = stats.employees;
+                } catch (error) {
+                    log(`❌ Failed: ${emp.first_name} ${emp.last_name} - ${error.message}`, 'error');
+                }
+                await new Promise(r => setTimeout(r, 300));
+            }
+
+            // Step 2: Review Cycles
+            log('📝 STEP 2: Creating Review Cycles...', 'info');
+            const cycles = [
+                {
+                    cycle_name: 'Q1 2025 Performance Review',
+                    start_date: '2025-01-01',
+                    end_date: '2025-03-31',
+                    status: 'in progress',
+                    description: 'First quarter performance evaluation'
+                },
+                {
+                    cycle_name: 'Q2 2025 Performance Review',
+                    start_date: '2025-04-01',
+                    end_date: '2025-06-30',
+                    status: 'planned',
+                    description: 'Second quarter performance evaluation'
+                }
+            ];
+
+            for (const cycle of cycles) {
+                try {
+                    await makeRequest('/CyclesSave', cycle);
+                    stats.cycles++;
+                    log(`✅ Created: ${cycle.cycle_name}`, 'success');
+                    document.getElementById('cycleCount').textContent = stats.cycles;
+                } catch (error) {
+                    log(`❌ Failed: ${cycle.cycle_name} - ${error.message}`, 'error');
+                }
+                await new Promise(r => setTimeout(r, 300));
+            }
+
+            // Step 3: Goals
+            log('📝 STEP 3: Creating Goals...', 'info');
+            const goals = [
+                {
+                    title: 'Complete API Development',
+                    descriptionText: 'Build REST APIs for employee management',
+                    status: 'in progress',
+                    emp_id: 1,
+                    emp_name: 'Rajesh Kumar',
+                    created_by: 'Admin',
+                    start_date: '2025-01-15',
+                    end_date: '2025-03-15'
+                },
+                {
+                    title: 'HR Process Improvement',
+                    descriptionText: 'Streamline recruitment process',
+                    status: 'in progress',
+                    emp_id: 2,
+                    emp_name: 'Priya Singh',
+                    created_by: 'Admin',
+                    start_date: '2025-01-20',
+                    end_date: '2025-02-28'
+                },
+                {
+                    title: 'Sales Target Q1',
+                    descriptionText: 'Achieve 50 new leads',
+                    status: 'in progress',
+                    emp_id: 3,
+                    emp_name: 'Amit Patel',
+                    created_by: 'Admin',
+                    start_date: '2025-01-01',
+                    end_date: '2025-03-31'
+                }
+            ];
+
+            for (const goal of goals) {
+                try {
+                    await makeRequest('/savegoals', goal);
+                    stats.goals++;
+                    log(`✅ Created: ${goal.title}`, 'success');
+                    document.getElementById('goalCount').textContent = stats.goals;
+                } catch (error) {
+                    log(`❌ Failed: ${goal.title} - ${error.message}`, 'error');
+                }
+                await new Promise(r => setTimeout(r, 300));
+            }
+
+            // Step 4: Reviews
+            log('📝 STEP 4: Creating Reviews...', 'info');
+            const reviews = [
+                {
+                    emp_id: 1,
+                    emp_name: 'Rajesh Kumar',
+                    review_cycle_id: 1,
+                    reviewer_id: 2,
+                    reviewer_name: 'Priya Singh',
+                    rating: 4.5,
+                    comments: 'Excellent technical skills',
+                    status: 'submitted',
+                    created_date: '2025-01-25'
+                },
+                {
+                    emp_id: 2,
+                    emp_name: 'Priya Singh',
+                    review_cycle_id: 1,
+                    reviewer_id: 1,
+                    reviewer_name: 'Rajesh Kumar',
+                    rating: 4.0,
+                    comments: 'Good leadership',
+                    status: 'submitted',
+                    created_date: '2025-01-25'
+                },
+                {
+                    emp_id: 3,
+                    emp_name: 'Amit Patel',
+                    review_cycle_id: 1,
+                    reviewer_id: 1,
+                    reviewer_name: 'Rajesh Kumar',
+                    rating: 3.5,
+                    comments: 'Needs improvement',
+                    status: 'submitted',
+                    created_date: '2025-01-25'
+                }
+            ];
+
+            for (const review of reviews) {
+                try {
+                    await makeRequest('/saveReviews', review);
+                    stats.reviews++;
+                    log(`✅ Created review for: ${review.emp_name}`, 'success');
+                    document.getElementById('reviewCount').textContent = stats.reviews;
+                } catch (error) {
+                    log(`❌ Failed: ${review.emp_name} - ${error.message}`, 'error');
+                }
+                await new Promise(r => setTimeout(r, 300));
+            }
+
+            // Done
+            log('═══════════════════════════════════════', 'info');
+            log('✅ ✅ ✅ ALL DATA CREATED SUCCESSFULLY ✅ ✅ ✅', 'success');
+            log('🔄 Refresh your React frontend to see the data!', 'warning');
+
+            const statusDiv = document.getElementById('status');
+            statusDiv.className = 'status status-success';
+            statusDiv.innerHTML = `
+                <strong>✅ Success!</strong><br>
+                Total data created: ${stats.employees} employees, ${stats.cycles} cycles, 
+                ${stats.goals} goals, ${stats.reviews} reviews
+            `;
+            statusDiv.style.display = 'block';
+
+            btn.disabled = false;
+            btn.textContent = 'Seed All Data';
+        }
+
+        // Test connection on load
+        window.addEventListener('load', testConnection);
+    </script>
+</body>
+</html>

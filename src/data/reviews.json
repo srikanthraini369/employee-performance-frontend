@@ -1,0 +1,122 @@
+[
+  {
+    "id": 1,
+    "review_cycle_id": 1,
+    "emp_id": 1,
+    "emp_name": "Vinod Kumar",
+    "reviewer_id": 5,
+    "reviewer_name": "Prasad Manager",
+    "rating": 4.5,
+    "comments": "Excellent performance in Q1. Completed all assigned projects on time with high quality. Great team collaboration and leadership skills.",
+    "status": "completed",
+    "created_date": "2025-03-28"
+  },
+  {
+    "id": 2,
+    "review_cycle_id": 2,
+    "emp_id": 1,
+    "emp_name": "Vinod Kumar",
+    "reviewer_id": 5,
+    "reviewer_name": "Prasad Manager",
+    "rating": 4.2,
+    "comments": "Good performance in Q2. Successfully led the mobile app development project. Communication with stakeholders could be improved.",
+    "status": "submitted",
+    "created_date": "2025-06-15"
+  },
+  {
+    "id": 3,
+    "review_cycle_id": 1,
+    "emp_id": 2,
+    "emp_name": "Priya Singh",
+    "reviewer_id": 5,
+    "reviewer_name": "Prasad Manager",
+    "rating": 3.8,
+    "comments": "Solid Q1 performance. Good technical skills but needs to improve on documentation and code reviews.",
+    "status": "completed",
+    "created_date": "2025-03-25"
+  },
+  {
+    "id": 4,
+    "review_cycle_id": 2,
+    "emp_id": 2,
+    "emp_name": "Priya Singh",
+    "reviewer_id": 5,
+    "reviewer_name": "Prasad Manager",
+    "rating": 4.0,
+    "comments": "Improved performance in Q2. Better code documentation and more proactive in team meetings.",
+    "status": "completed",
+    "created_date": "2025-06-20"
+  },
+  {
+    "id": 5,
+    "review_cycle_id": 1,
+    "emp_id": 3,
+    "emp_name": "Amit Patel",
+    "reviewer_id": 5,
+    "reviewer_name": "Prasad Manager",
+    "rating": 3.5,
+    "comments": "Q1 performance meets expectations. Good technical knowledge but needs to improve on deadline management.",
+    "status": "completed",
+    "created_date": "2025-03-22"
+  },
+  {
+    "id": 6,
+    "review_cycle_id": 2,
+    "emp_id": 3,
+    "emp_name": "Amit Patel",
+    "reviewer_id": 5,
+    "reviewer_name": "Prasad Manager",
+    "rating": 3.8,
+    "comments": "Better time management in Q2. Delivered projects on schedule. Continue to focus on code quality.",
+    "status": "draft",
+    "created_date": "2025-06-18"
+  },
+  {
+    "id": 7,
+    "review_cycle_id": 1,
+    "emp_id": 4,
+    "emp_name": "Neha Desai",
+    "reviewer_id": 5,
+    "reviewer_name": "Prasad Manager",
+    "rating": 4.7,
+    "comments": "Outstanding Q1 performance! Exceeds expectations in all areas. Great mentor for junior team members.",
+    "status": "completed",
+    "created_date": "2025-03-30"
+  },
+  {
+    "id": 8,
+    "review_cycle_id": 2,
+    "emp_id": 4,
+    "emp_name": "Neha Desai",
+    "reviewer_id": 5,
+    "reviewer_name": "Prasad Manager",
+    "rating": 4.8,
+    "comments": "Exceptional Q2 performance! Led the database optimization project successfully. Strong leadership and problem-solving abilities.",
+    "status": "completed",
+    "created_date": "2025-06-22"
+  },
+  {
+    "id": 9,
+    "review_cycle_id": 2,
+    "emp_id": 5,
+    "emp_name": "Prasad Manager",
+    "reviewer_id": 6,
+    "reviewer_name": "HR Admin",
+    "rating": 4.3,
+    "comments": "Effective management of team. Good mentorship to reports. Meets all project deadlines.",
+    "status": "submitted",
+    "created_date": "2025-06-19"
+  },
+  {
+    "id": 10,
+    "review_cycle_id": 4,
+    "emp_id": 1,
+    "emp_name": "Vinod Kumar",
+    "reviewer_id": 5,
+    "reviewer_name": "Prasad Manager",
+    "rating": 4.3,
+    "comments": "Strong annual performance. Successfully completed multiple critical projects. Team player with good communication skills.",
+    "status": "draft",
+    "created_date": "2025-10-20"
+  }
+]
