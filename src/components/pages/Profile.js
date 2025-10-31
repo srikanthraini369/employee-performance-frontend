@@ -1,4 +1,4 @@
-import { useState, useEffect, use } from 'react';
+import { useState, useEffect } from 'react';
 import '../styles/Profile.css';
 import '../styles/Table.css';
 import ApiService from '../../services/ApiService';
