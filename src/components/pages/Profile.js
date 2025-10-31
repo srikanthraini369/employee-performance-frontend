@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, use } from 'react';
 import '../styles/Profile.css';
 import '../styles/Table.css';
 import ApiService from '../../services/ApiService';
@@ -96,7 +96,7 @@ const Profile = ({ currentUser, onUserUpdate }) => {
       gender: userData.gender || '',
       phoneNo: userData.phoneNo || '',
       email: userData.email || '',
-      password: userData?.password || '',
+      password: userData?.password ||  '',
       manager_id: userData.manager_id || '',
       department: userData.department || '',
       job_title: userData.job_title || '',
