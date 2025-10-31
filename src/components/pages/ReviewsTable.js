@@ -518,20 +518,8 @@ const ReviewsTable = () => {
                       </td>
                       <td>{review.created_date}</td>
                       <td className="actions-cell">
-                        <button
-                          className="btn-sm btn-danger"
-                          onClick={() => handleDelete(review.id)}
-                        >
-                          Delete
-                        </button>
-                        {review.reviewer_id === user?.id && (
-                          <button
-                            className="btn-sm btn-warning"
-                            onClick={() => handleEdit(review)}
-                          >
-                            Edit
-                          </button>
-                        )}
+                        {review.reviewer_id === user?.id && (<button className="btn-sm btn-danger" onClick={() => handleDelete(review.id)} > Delete </button> )}
+                        {review.reviewer_id === user?.id && ( <button  className="btn-sm btn-warning"  onClick={() => handleEdit(review)} > Edit </button> )}
                       </td>
                     </tr>
                   ))
